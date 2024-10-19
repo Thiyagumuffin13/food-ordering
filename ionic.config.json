@@ -1,5 +1,8 @@
 {
   "name": "Food-ordering",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "1f9b0d6f"
 }
