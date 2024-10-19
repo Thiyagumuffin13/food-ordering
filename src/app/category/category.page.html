@@ -1,0 +1,79 @@
+<!-- <ion-app>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Category Content</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="goToProducts('burgers')">Burgers</ion-item>
+        <ion-item (click)="goToProducts('rolls')">Rolls</ion-item>
+     
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Select Category</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
+  </div>
+</ion-app> -->
+
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Category</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list >
+      <ion-item (click)="goToProducts('burgers')">Burgers</ion-item>
+      <ion-item (click)="goToProducts('rolls')">Rolls</ion-item>
+    </ion-list>
+  </ion-content>
+  
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Select Category</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list *ngIf="selectedCategory">
+      <ion-item *ngFor="let product of productList">
+        <ion-thumbnail slot="start">
+          <img [src]="product.image" alt="{{ product.name }}">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ product.name }}</h2>
+          <p>{{ product.description }}</p>
+          <h3>${{ product.price }}</h3>
+        </ion-label>
+        <ion-button (click)="decreaseCount(product)">-</ion-button>
+        <ion-text>{{ product.count }}</ion-text>
+        <ion-button (click)="increaseCount(product)">+</ion-button>
+      </ion-item>
+    </ion-list>
+  
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button expand="block" (click)="addToCart()">Add to Cart (${{ totalPrice }})</ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-content>
+  
+</div>
+
+

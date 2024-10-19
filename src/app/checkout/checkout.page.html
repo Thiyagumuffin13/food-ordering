@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>Total: ${{ totalPrice }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button expand="block" (click)="makePayment()">Pay Now</ion-button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
