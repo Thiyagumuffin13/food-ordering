@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService } from '../product.service';
+import { ProductService } from '../productList/product.service';
 import { Product } from '../model/product';
+import { CartItem } from '../model/cart-item';
 
 @Component({
   selector: 'app-category',
@@ -10,48 +11,40 @@ import { Product } from '../model/product';
 })
 export class CategoryPage implements OnInit {
 
-  selectedCategory: any;
-  productList: Product[] = [];
-  totalPrice = 0;
+  selectedCategory: string = 'burger';
+  totalPrice: number = 0;
+  totalCount: number = 0; 
+  cartItems: CartItem[] = []; 
+   isCheckout: boolean = false;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(private router: Router){
 
-  ngOnInit() {
-    this.productService.selectedCategory$.subscribe(category => {
-      console.log("---d----",category);
-      
-      this.selectedCategory = category;
+  }
+  ngOnInit() {} 
 
-      this.productService.productList$.subscribe(products => {
-        this.productList = products;
-        this.calculateTotal();
-      });
-    });
+  onCategorySelected(category: string) {
+    console.log("*********",category);
+
+    this.selectedCategory = category;
   }
 
-  goToProducts(category: string) {
-    this.productService.setCategory(category);
+  updateTotalPrice(price: number) {
+    this.totalPrice = price; 
   }
 
-  increaseCount(product: any) {
-    product.count++;
-    this.calculateTotal();
+  updateTotalCount(count: number) {
+    this.totalCount = count; 
+  }
+  makePayment() {
+    // Mock a successful payment and navigate to the order confirmation page
+    const orderNumber = this.generateOrderNumber();
+    this.router.navigate(['/order-confirmation'], { queryParams: { orderNumber } });
   }
 
-  decreaseCount(product: any) {
-    if (product.count > 0) {
-      product.count--;
-      this.calculateTotal();
-    }
+  generateOrderNumber() {
+    return Math.floor(100000 + Math.random() * 900000); // Generate random 6-digit number
   }
 
-  calculateTotal() {
-    this.totalPrice = this.productList.reduce((total, item: any) => total + (item.price * item.count), 0);
-  }
-
-  addToCart() {
-    localStorage.setItem('cart', JSON.stringify(this.productList));
-    this.router.navigate(['/checkout']);
-  }
+  
 
 }

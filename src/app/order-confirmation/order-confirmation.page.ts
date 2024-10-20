@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service';
+import { ProductService } from '../productList/product.service';
 
 @Component({
   selector: 'app-order-confirmation',
